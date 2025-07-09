@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -16,7 +18,7 @@ app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/auth', authRoutes);
 
-mongoose.connect('mongodb://localhost:27017/cinemaverse')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('DB connected'))
 .catch(err => console.error(err));
 

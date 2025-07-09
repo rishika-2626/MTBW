@@ -2,10 +2,11 @@ const Showtime = require('../models/showtimes');
 
 exports.getAllShowtimes = async (req, res) => {
     try {
-        const showtimes = await Showtime.find().populate('movie theater');
+        const showtimes = await Showtime.find().populate('movie theatre');
         res.status(200).json(showtimes);
     }
     catch(err){
+        
         res.status(500).json({message : 'Server error'});
     }
 };

@@ -39,7 +39,7 @@ exports.getTheatresForMovie = async (req, res) => {
         const theatres = showtimes.map(s => s.theatre);
 
         const uniqueTheatres = [];
-        const theatreIds = new set();
+        const theatreIds = new Set();
 
         for(const theatre of theatres){
             const id = theatre._id.toString();

@@ -6,7 +6,7 @@ exports.createBooking = async (req, res) => {
     const { showTimeId, seats, totalPrice } = req.body;
     const userId = req.user._id; //from auth middleware
 
-    const showtime = await Showtime.findById(showTImeId);
+    const showtime = await Showtime.findById(showTimeId);
     if(!showtime) return res.status(404).json({ message: 'Showtime not found'});
 
     const unavailable = seats.filter(seat => showtime.seats.find(s => s.seatNumber === seat && s.isBooked));
