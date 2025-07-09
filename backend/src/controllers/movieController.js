@@ -36,9 +36,23 @@ exports.getTheatresForMovie = async (req, res) => {
     try {
         const movieId = req.params.id;
         const showtimes = await Showtime.find({movie : movieId}).populate('theatre');
+        const theatres = showtimes.map(s => s.theatre);
+
+        const uniqueTheatres = [];
+        const theatreIds = new set();
+
+        for(const theatre of theatres){
+            const id = theatre._id.toString();
+            if(!theatreIds.has(id)){
+                theatreIds.add(id);
+                uniqueTheatres.push(theatre);
+            }
+        }
+
+        res.status(200).json(uniqueTheatres);
     }
     catch(err){
-
+        res.status(500).json({message : 'Server error'});
     }
 };
 
